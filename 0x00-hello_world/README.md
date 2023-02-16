@@ -2,3 +2,5 @@ Task 0 - Write a script that runs a C file through the preprocessor and save the
 Task 1 - Compiler
 Task 2 - Assembler
 Task 3 - CIsFun
+Task 4 - Hello, puts
+Task 5 - Hello, printf
