@@ -10,15 +10,10 @@
 
 int main(void)
 {
-	char a = '0';
+	int a;
 
-	while (a <= '9')
-	{
-		putchar(a);
-		a++;
-	}
-
-	putchar(a);
+	for (a = 0; a <= 9; a++)
+		printf("%d \n", a);
 
 	return (0);
 
