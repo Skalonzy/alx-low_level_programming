@@ -5,3 +5,4 @@ Task 3 - CIsFun
 Task 4 - Hello, puts
 Task 5 - Hello, printf
 Task 6 - Size is not grandeur, and territory does not make a nation
+Task 7 - Intel
