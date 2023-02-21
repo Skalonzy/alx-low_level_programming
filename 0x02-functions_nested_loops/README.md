@@ -12,3 +12,4 @@ Task 10 - Write a function that adds two integers and returns the result.
 Task 11 - Write a function that prints all natural numbers from n to 98, followed by a new line.
 Task 12 - Write a function that prints the n times table, starting with 0.
 Task 13 - Nature made the natural numbers; All else is the work of women
+Task 14 - Write a program that prints the first 50 Fibonacci numbers, starting with 1 and 2, followed by a new line.
