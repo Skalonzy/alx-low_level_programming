@@ -23,7 +23,7 @@ int main(void)
 
 		if (i < 49)
 		{
-			prinft(", ");
+			printf(", ");
 		}
 		i++;
 	}
