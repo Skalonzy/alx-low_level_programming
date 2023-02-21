@@ -13,3 +13,4 @@ Task 11 - Write a function that prints all natural numbers from n to 98, followe
 Task 12 - Write a function that prints the n times table, starting with 0.
 Task 13 - Nature made the natural numbers; All else is the work of women
 Task 14 - Write a program that prints the first 50 Fibonacci numbers, starting with 1 and 2, followed by a new line.
+Task 15 - By considering the terms in the Fibonacci sequence whose values do not exceed 4,000,000, write a program that finds and prints the sum of the even-valued terms, followed by a new line.
