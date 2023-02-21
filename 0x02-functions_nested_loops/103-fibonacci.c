@@ -1,4 +1,4 @@
-#include <sdtio.h>
+#include <stdio.h>
 
 /**
  * main - prints even numbers < 4,000,000
