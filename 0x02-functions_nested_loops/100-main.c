@@ -2,6 +2,9 @@
 
 /**
  * main - check the code.
+ * print_times_table - Write a function
+ * that prints the n times
+ * table, starting with zero.
  *
  * Return: Always 0.
  */
