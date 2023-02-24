@@ -10,3 +10,4 @@ Task 8 - You are so much sunshine in every square inch
 Task 9 - Fizz-Buzz
 Task 10 - Triangles
 Task 11 - The problem of distinguishing prime numbers from composite numbers and of resolving the latter into their prime factors is known to be one of the most important and useful in arithmetic
+Task 12 - Numbers have life; they're not just symbols on paper
