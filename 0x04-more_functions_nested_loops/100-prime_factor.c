@@ -14,7 +14,7 @@ int main(void)
 	while (a % 2 == 0)
 	{
 		b = 2;
-		a / 2;
+		a /= 2;
 	}
 
 	for (c = 3; c <= sqrt(a); c = c + 2)
@@ -31,7 +31,7 @@ int main(void)
 		b = a;
 	}
 
-	printf("%ld\n", n);
+	printf("%ld\n", b);
 
 	return (0);
 
