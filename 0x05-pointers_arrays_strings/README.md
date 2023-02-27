@@ -3,3 +3,4 @@ Task 1 - Don't swap horses in crossing a stream
 Task 2 - This report, by its very length, defends itself against the risk of being read
 Task 3 - Write a function that prints a string, followed by a new line, to stdout.
 Task 4 - I can only go one way. I've not got a reverse gear
+Task 5 - Write a function that reverses a string.
