@@ -7,4 +7,5 @@ Task 5 - Write a function that changes all lowercase letters of a string to uppe
 Task 6 - Write a function that capitalizes all words of a string.
 Task 7 - Write a function that encodes a string into 1337.
 Task 8 - Write a function that encodes a string using rot13.
-Task 9 - Write a function that prints an integer. 
+Task 9 - Write a function that prints an integer.
+Task 10 - A dream doesn't become reality through magic; it takes sweat, determination and hard work. 
