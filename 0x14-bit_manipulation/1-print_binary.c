@@ -16,21 +16,17 @@ void print_binary(unsigned long int n)
 		return;
 	}
 
-	while ((n >> i) > 0)
-	{
-		if ((n >> i) & mask)
-			i++;
+	while ((n >> (i + 1)) > 0)
+		i++;
 
-		else
-			break;
-	}
-
-	for (; i >= 0; i--)
+	while (i >= 0)
 	{
 		if ((n >> i) & mask)
 			_putchar('1');
 
 		else
 			_putchar('0');
+
+		i--;
 	}
 }
