@@ -7,7 +7,7 @@
  * Return: decimal value
  */
 
-unsigned int b_to_u(const char *binary_number)
+unsigned int bnary_to_uint(const char *binary_number)
 {
 	if (!binary_number)
 		return (0);
