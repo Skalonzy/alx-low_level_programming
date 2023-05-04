@@ -1,5 +1,4 @@
 #include "main.h"
-#include <string.h>
 
 /**
  * b_to_u - print binary to unit
@@ -16,9 +15,9 @@ unsigned int b_to_u(const char *binary_number)
 	unsigned int decimal_value = 0;
 	int power_of_two = 1;
 
-	for (int i = strlen(binary_number) - 1; i >= 0; i--)
+	for (; *binary_number; binary_number++)
 	{
-		int digit = binary_number[i] - '0';
+		int digit = *binary_number - '0';
 
 		if (digit < 0 || digit > 1)
 			return (0);
