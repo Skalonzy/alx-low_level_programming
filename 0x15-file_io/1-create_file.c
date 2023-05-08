@@ -10,24 +10,23 @@
 
 int create_file(const char *filename, char *text_content)
 {
-	if (filename == NULL)
-		return (-1);
-
-	int fd = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
-
-	if (fd == -1)
-		return (-1);
-
-	int len = 0;
+	int a, b, c = 0;
 
 	if (text_content != NULL)
 	{
-		while (text_content[len] != '\0')
-			len++;
+		for (c = 0; text_content[c];)
+			c++;
 	}
 
-	ssize_t written = write(fd, text_content, len);
-	close(fd);
+	if (filename == NULL)
+		return (-1);
 
-	return ((written == len) ? 0 : -1);
+	a = opem(filename, O_CREAT | O_RDWR | 0_TRUNC, 0600);
+	b = write(a, text_content, c);
+
+	if (a == -1 || b == -1)
+		return (-1);
+
+	close(a);
+	return (1);
 }
