@@ -54,27 +54,27 @@ int main(int argc, char *argv[])
 	char *buffer;
 
 	buffer = create_buffer(argv[2]);
-	int f = open(argv[1], O_RDONLY);
-	int t = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	int r = read(f, buffer, 1024);
-	int w = write(t, buffer, r);
+	int from = open(argv[1], O_RDONLY);
+	int to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	int r = read(from, buffer, 1024);
+	int w = write(to, buffer, r);
 	size_t bytes_read;
 
-	if (f == -1 || t == -1)
+	if (from == -1 || to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't open file\n");
 		free(buffer);
 		exit(98);
 	}
 
-	if (f == -1 || r == -1)
+	if (from == -1 || r == -1)
 	{
 		dprintf(STDERR_FILENO, "Erro: Can't read file %s\n", argv[1]);
 		free(buffer);
 		exit(98);
 	}
 
-	if (t == -1 || w == -1)
+	if (to == -1 || w == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		free(buffer);
@@ -82,8 +82,8 @@ int main(int argc, char *argv[])
 	}
 
 	while ((bytes_read = read(from, buffer, 1024)) > 0)
-		write(t, buffer, bytes_read);
-	close_file(f);
-	close_file(t);
+		write(to, buffer, bytes_read);
+	close_file(from);
+	close_file(to);
 	return (0);
 }
