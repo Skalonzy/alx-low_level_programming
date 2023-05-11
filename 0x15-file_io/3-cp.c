@@ -12,9 +12,13 @@ char *create_buffer(char *file);
 
 void close_file(int fd)
 {
-	if (close(fd) == -1)
+	int a = close(fd);
+
+	if (a == -1)
+	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-	exit(100);
+		exit(100);
+	}
 }
 
 /**
@@ -26,7 +30,9 @@ void close_file(int fd)
 
 char *create_buffer(char *file)
 {
-	char *b = malloc(1024 * sizeof(char));
+	char *b;
+
+	b = malloc(sizeof(char) * 1024);
 
 	if (b == NULL)
 	{
