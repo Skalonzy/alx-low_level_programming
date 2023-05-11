@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void cf(int fd);
-char *cb(char *file);
+void close_file(int fd);
+char *create_buffer(char *file);
 
 /**
- * cf - Closes file descriptors.
+ * close_file - Closes file descriptors.
  * @fd: file descriptor
  */
 
-void cf(int fd)
+void close_file(int fd)
 {
 	if (close(fd) == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
@@ -18,13 +18,13 @@ void cf(int fd)
 }
 
 /**
- * cb - Allocates 1024 bytes for a buffer.
+ * create_buffer - Allocates 1024 bytes for a buffer.
  * @file: 1st aargument.
  *
  * Return: A pointer.
  */
 
-char *cb(char *file)
+char *create_buffer(char *file)
 {
 	char *b = malloc(1024 * sizeof(char));
 
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 
 	while ((bytes_read = read(from, buffer, 1024)) > 0)
 		write(t, buffer, bytes_read);
-	cf(f);
-	cf(t);
+	close_file(f);
+	close_file(t);
 	return (0);
 }
