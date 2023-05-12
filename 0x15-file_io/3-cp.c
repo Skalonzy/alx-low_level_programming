@@ -1,62 +1,41 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 
-void handleError(const char *errorMsg, const char *file1,
-	       const char *file2, int exitCode);
-void copyFile(const char *fromFile, const char *toFile);
+#define BUFFER_SIZE 1024
 
 /**
- * handleError - handle error messages and exit codes consistently.
- * @errorMsg: 1st parameter
- * @file1: 2nd parameter
- * @file2: 3rd parameter
- * @exitCode: 4th parameter
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
+ *
+ * Return: A pointer to the newly-allocated buffer.
  */
 
-void handleError(const char *errorMsg, const char *file1,
-	       const char *file2, int exitCode)
+char *create_buffer()
 {
-	dprintf(STDERR_FILENO, errorMsg, file1, file2);
-	exit(exitCode);
+	char *buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+
+	if (buffer == NULL)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't allocate memory for buffer\n");
+		exit(99);
+	}
+	return (buffer);
 }
 
 /**
- * copyFile - copies entities from one file to another
- * @fromFile: 1st parameter
- * @toFile: 2nd parameter
+ * close_file - Closes file descriptors.
+ * @fd: The file descriptor to be closed.
  */
 
-void copyFile(const char *fromFile, const char *toFile)
+void close_file(int fd)
 {
-	const size_t bufferSize = 1024;
-	char buffer[bufferSize];
-	int bytesRead, bytesWritten;
-	int from, to;
-
-	from = open(fromFile, O_RDONLY);
-	if (from == -1)
-		handleError("Error: Can't read from file %s\n", fromFile, "", 98);
-
-	to = open(toFile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (to == -1)
-		handleError("Error: Can't write to %s\n", "", toFile, 99);
-
-	do {
-		bytesRead = read(from, buffer, bufferSize);
-		if (bytesRead == -1)
-			handleError("Error: Can't read from file %s\n", fromFile, "", 98);
-
-		bytesWritten = write(to, buffer, bytesRead);
-		if (bytesWritten == -1)
-			handleError("Error: Can't write to %s\n", "", toFile, 99);
-	} while (bytesRead > 0);
-
-	if (close(from) == -1)
-		handleError("Error: Can't close file %s\n", fromFile, "", 100);
-
-	if (close(to) == -1)
-		handleError("Error: Can't close file %s\n", toFile, "", 100);
+	if (close(fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fd);
+		exit(100);
+	}
 }
 
 /**
@@ -69,13 +48,57 @@ void copyFile(const char *fromFile, const char *toFile)
 
 int main(int argc, char *argv[])
 {
+	int from, to, r, w;
+	char *buffer;
+
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
-	copyFile(argv[1], argv[2]);
+	buffer = create_buffer();
+	from = open(argv[1], O_RDONLY);
+	if (from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't open file %s for reading\n", argv[1]);
+		free(buffer);
+		exit(98);
+	}
 
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't open file %s for writing\n", argv[2]);
+		free(buffer);
+		close_file(from);
+		exit(99);
+	}
+
+	while ((r = read(from, buffer, BUFFER_SIZE)) > 0)
+	{
+		w = write(to, buffer, r);
+		if (w == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]);
+			free(buffer);
+			close_file(from);
+			close_file(to);
+			exit(99);
+		}
+	}
+
+	if (r == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		free(buffer);
+		close_file(from);
+		close_file(to);
+		exit(98);
+	}
+
+	free(buffer);
+	close_file(from);
+	close_file(to);
 	return (0);
 }
